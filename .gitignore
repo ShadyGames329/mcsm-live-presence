@@ -1,0 +1,35 @@
+# Personal settings, generated output and runtime state
+config.json
+*.local.json
+.env
+.env.*
+!.env.example
+state/
+telemetry/
+build/
+dist/
+*.log
+*.pid
+.venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+
+# Original or generated game assets must never enter the repository
+*.ttarch2
+*.landb
+*.bundle
+*.estore
+*.epage
+*.prop
+*.exe
+*.dll
+*.zip
+*.bak
+*.luac
+
+# Local editor settings
+.idea/
+.vscode/
+.DS_Store

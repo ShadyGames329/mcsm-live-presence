@@ -1,0 +1,33 @@
+name: CI
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  python:
+    runs-on: ubuntu-24.04
+    strategy:
+      matrix:
+        python: ['3.11', '3.13']
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Test source without game files
+        env:
+          PYTHONPATH: src
+        run: python -m unittest discover -s tests -v
+      - name: Check launcher syntax
+        run: bash -n scripts/launch.sh
+      - name: Audit tracked publication files
+        run: python scripts/audit_publication.py
+  lua:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Lua 5.2 in the CI runner
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y lua5.2
+      - name: Exercise probe with a mocked engine
+        run: lua5.2 tests/probe_mock.lua

@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mcsm-live-presence"
+version = "0.1.0"
+description = "Live Discord Rich Presence for Minecraft: Story Mode Season One on Linux and Proton"
+readme = "README.md"
+requires-python = ">=3.11"
+license = "MIT"
+dependencies = ["pypresence>=4.3,<5"]
+
+[project.optional-dependencies]
+mod = ["ttg-cli-inspector @ git+https://github.com/haister/ttg-cli-inspector.git@27ead0379d6eb80f198cb879bd8bf3944fffca9f"]
+
+[project.scripts]
+mcsm-live-presence = "mcsm_live_presence.__main__:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+mcsm_live_presence = ["lua/*.lua"]
